@@ -1,7 +1,7 @@
 const net = require("net"),
     fs = require("fs"),
     LineAnalyser = require("./src/LineAnalyser"),
-    spiel = fs.readFileSync("./data/mylogfile.txt", "utf8"),
+    spiel = fs.readFileSync("./data/mylogfile.log", "utf8"),
     server = net.createServer()
 
 let remoteAddress, conn
@@ -11,6 +11,8 @@ server.on("connection", handleConnection)
 server.listen(9000, () => {
     console.log("server listening to %j", server.address())
 })
+
+dataAnalysis = new LineAnalyser(spiel)
 
 function handleData(data) {
     console.log(
@@ -23,10 +25,16 @@ function handleData(data) {
                 .toUpperCase()
                 .trim()}\n`
         )
-    dataAnalysis = new LineAnalyser(data)
-    dataAnalysis._read()
-    dataAnalysis._write()
-    console.log(dataAnalysis)
+    dataAnalysis.on("readable", () => {
+        let chunk
+        while (null !== (chunk = dataAnalysis.read())) {
+            console.log("read: ", chunk.toString())
+        }
+    })
+    dataAnalysis.stopTimer()
+
+    dataAnalysis.write(data)
+    dataAnalysis.stopTimer
 }
 
 handleData(spiel)
@@ -39,6 +47,7 @@ function handleConnection(conn) {
 
     function handleClose() {
         console.log(`${remoteAddress} has closed`)
+        dataAnalysis.end()
     }
 
     function handleError(e) {

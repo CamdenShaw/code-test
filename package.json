@@ -4,7 +4,8 @@
     "description": "A duplex stream for Hack Capital's code test.",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "node ./__test__/line-analyser.spec.js",
+        "start": "node --debug --inspect index.js"
     },
     "author": "Camden Shaw",
     "license": "ISC"

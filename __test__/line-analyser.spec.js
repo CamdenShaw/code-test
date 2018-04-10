@@ -1,24 +1,44 @@
-const LineAnalyser = require("../index.js")
-// const data = require("../data/mylogfile.log")
+const fs = require("fs"),
+    data = fs.readFileSync("./data/mylogfile.txt", "utf8"),
+    LineAnalyser = require("../src/LineAnalyser.js")
 
-describe("A line analyser that creates an object that analyses line separated text files.", () => {
-    test.lineAnalyser = new LineAnalyser()
-    describe("When a text file is inserted", () => {
-        it("Should read the file.", () => {
-            expect(test.lineAnalyser._read().toEqual())
-        })
-        it("Should return the elapsed time in milliseconds", () => {
-            expect(test.lineAnalyser._write()["time"].toBe())
-        })
-    })
-    describe("bytes", () => {
-        it("Should return the length of file in bytes", () => {
-            expect(test.lineAnalyser._write()["size"].toBe())
-        })
-    })
-    describe("number of lines", () => {
-        it("Should return a line count", () => {
-            expect(test.lineAnalyser._write()["lines"].toBe())
-        })
-    })
-})
+lineAnalyser = new LineAnalyser(data)
+
+const expect = (par1, par2) => {
+    if (par1 === par2) console.log("success")
+    else console.log("FAIL")
+}
+
+const it = (text, func) => {
+    console.log("it", text)
+    // func()
+}
+
+const describe = (text, ...funcs) => {
+    console.log("describe", text)
+    // if (isObject) funcs.forEach(fun => fun())
+    // else return funcs
+}
+
+describe(
+    "A line analyser that creates an object that analyses line separated text files.",
+    describe(
+        "When a text file is inserted",
+        it("Should read the file.", expect(typeof lineAnalyser._read(), "")),
+        it(
+            "Should return the elapsed time in milliseconds",
+            expect(typeof lineAnalyser._write(), Date)
+        )
+    ),
+    describe(
+        "bytes",
+        it(
+            "Should return the length of file in bytes",
+            expect(typeof lineAnalyser._write(), String)
+        )
+    ),
+    describe(
+        "number of lines",
+        it("Should return a line count", expect(lineAnalyser._write(), Number))
+    )
+)
