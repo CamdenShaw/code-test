@@ -1,0 +1,11 @@
+{
+    "name": "duplex-stream-hack-capital",
+    "version": "1.0.0",
+    "description": "A duplex stream for Hack Capital's code test.",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Camden Shaw",
+    "license": "ISC"
+}
