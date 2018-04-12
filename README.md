@@ -13,7 +13,7 @@ in another terminal shell/window/tab
 you will need to have netcat installed for this last part
 
 Running `npm start` will automatically pipe mylogfile.log back into itself and generate 
-an object log file - ObjectLog.log (that still needs to be parsed into human readable content
+an object log file - ObjectLog.log (that still needs to be parsed into human readable content)
 
 Running `npm test` as it is won't do anything (the way I know how to write tests
 involves using the jest dependency and I couldn't figure out how to write a
