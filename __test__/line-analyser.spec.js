@@ -1,3 +1,7 @@
+/*
+ *  originally written based on the "jest" dependency, then rewritten to try to recreate the tests jest supplies.
+*/
+
 const fs = require("fs"),
     data = fs.readFileSync("./data/mylogfile.txt", "utf8"),
     LineAnalyser = require("../src/LineAnalyser.js")

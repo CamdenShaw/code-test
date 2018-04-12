@@ -1,7 +1,18 @@
+/*
+ * This was going to be the stream that wrote a human readable 
+ * log but I ran out of time to write it, as I passed the 
+ * 24hrs allotted for the test as it was.
+*/
+
 const { Duplex } = require("stream"),
     dataSource = Symbol("source"),
     fs = require("fs")
 
+/* Created Custom Duplex class following instructions on code 
+ * winds blog.  Updated what was on the blog to current es6 
+ * model
+ * http://codewinds.com/blog/2013-08-31-nodejs-duplex-streams.html#for_additional_reading
+*/
 class Logger extends Duplex {
     constructor(source, options) {
         super(options)
